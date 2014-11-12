@@ -1,4 +1,5 @@
 State state;
+PImage logo;
 
 void setup() {
   size(400, 300, P3D);  
@@ -7,6 +8,7 @@ void setup() {
   fill(255);
   noStroke();
   
+  logo = loadImage("./background.png");
   state = new Opening();
 }
 

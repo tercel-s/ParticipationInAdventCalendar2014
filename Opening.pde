@@ -15,13 +15,12 @@ class Opening implements State {
       }
     }
     cameraAngle = 100;
-    tex = loadImage("./background.png");
   }
   
   
   State update() {
-    final float partWidth  = (float)width  / N;
-    final float partHeight = (float)height / N;
+    final float FRAGMENT_WIDTH  = (float)width  / N;
+    final float FRAGMENT_HEIGHT = (float)height / N;
     
     final float MAX_SPEED = 20;
     final float MAX_ANGULAR_RATE = 10;
@@ -32,7 +31,7 @@ class Opening implements State {
     
     randomSeed(0);
     
-    cameraAngle = cameraAngle > 0 ? cameraAngle - 1 : 0;
+    cameraAngle = 0 < cameraAngle ? cameraAngle - 1 : 0;
 
     final float MAX_CAMERA_ANGULAR_RATE = 1.5;
     // ------------------------------------------------------------
@@ -50,8 +49,8 @@ class Opening implements State {
 
         int coef = max(0, --timers[i * N + j]);
 
-        translate((i + 0.5) * partWidth, 
-                  (j + 0.5) * partHeight, 
+        translate((i + 0.5) * FRAGMENT_WIDTH, 
+                  (j + 0.5) * FRAGMENT_HEIGHT, 
                   0);
         
         translate(random(-MAX_SPEED, MAX_SPEED) * coef,
@@ -63,12 +62,12 @@ class Opening implements State {
         rotateZ(radians(random(-MAX_ANGULAR_RATE, MAX_ANGULAR_RATE) * coef));
 
         beginShape();
-        texture(tex);
+        texture(logo);
         
-        vertex(-0.5 * partWidth, -0.5 * partHeight, 0, i * partWidth, j * partHeight);
-        vertex(-0.5 * partWidth,  0.5 * partHeight, 0, i * partWidth, (j+1) * partHeight);
-        vertex( 0.5 * partWidth,  0.5 * partHeight, 0, (i+1) * partWidth, (j+1) * partHeight);
-        vertex( 0.5 * partWidth, -0.5 * partHeight, 0, (i+1) * partWidth, j * partHeight);
+        vertex(-0.5 * FRAGMENT_WIDTH, -0.5 * FRAGMENT_HEIGHT, 0,    i  * FRAGMENT_WIDTH,    j  * FRAGMENT_HEIGHT);
+        vertex(-0.5 * FRAGMENT_WIDTH,  0.5 * FRAGMENT_HEIGHT, 0,    i  * FRAGMENT_WIDTH, (j+1) * FRAGMENT_HEIGHT);
+        vertex( 0.5 * FRAGMENT_WIDTH,  0.5 * FRAGMENT_HEIGHT, 0, (i+1) * FRAGMENT_WIDTH, (j+1) * FRAGMENT_HEIGHT);
+        vertex( 0.5 * FRAGMENT_WIDTH, -0.5 * FRAGMENT_HEIGHT, 0, (i+1) * FRAGMENT_WIDTH,    j  * FRAGMENT_HEIGHT);
 
         endShape(CLOSE);
         
