@@ -9,11 +9,16 @@ void setup() {
   noStroke();
   
   logo = loadImage("./background.png");
+  
   state = new Opening();
 }
 
 void draw() {
   background(255);
+  
+  // jsモードでテクスチャ読み込みの成功率を上げるためのコード
+  // by @Hau-Kun
+  if(logo.get(0, 0) == 0) return;
   camera();
 
   state = state.update(); 
@@ -23,7 +28,6 @@ class Opening implements State {
   private final int[] timers;
 
   private float  cameraAngle;
-  private PImage tex;
 
   public Opening() {
     // ----------------------------------------

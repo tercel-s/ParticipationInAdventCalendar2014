@@ -3,7 +3,6 @@ class Opening implements State {
   private final int[] timers;
 
   private float  cameraAngle;
-  private PImage tex;
 
   public Opening() {
     // ----------------------------------------
